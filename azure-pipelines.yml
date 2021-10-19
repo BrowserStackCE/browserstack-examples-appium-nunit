@@ -1,0 +1,34 @@
+trigger:
+- develop
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: BrowserStackConfig@0
+  name: 'BrowserStackConfiguration'
+  displayName: 'BrowserStack Configuration'
+  inputs:
+    BrowserStackServiceEndPoint: 'BStack Demo Account'
+
+- task: DotNetCoreCLI@2
+  name: 'RestoreProject'
+  displayName: 'Restore Project'
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  name: 'BuildProject'
+  displayName: 'Build Project'
+  inputs:
+    command: 'build'
+- task: DotNetCoreCLI@2
+  name: 'TestProject'
+  displayName: 'Test Project'
+  inputs:
+    command: 'test'
+  env:
+    CAPABILITIES_FILENAME: capabilities.yml
+    BROWSERSTACK_ANDROID_APP_ID: SimpleApp_Android
+    BROWSERSTACK_IOS_APP_ID: SimpleApp_iOS
