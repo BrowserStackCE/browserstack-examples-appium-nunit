@@ -50,7 +50,7 @@ namespace BrowserStack.App.Common
         {
             return App
                 .Capabilities
-                .GetCapability("os")
+                .GetCapability("platformName")
                 .ToString()
                 .ToLower()
                 .Equals(DeviceType.Android.ToString().ToLower());
