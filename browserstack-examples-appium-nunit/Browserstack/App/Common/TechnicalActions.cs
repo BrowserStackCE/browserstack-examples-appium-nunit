@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using BrowserStack.WebDriver.Config;
 using log4net;
 using OpenQA.Selenium;
@@ -50,7 +49,7 @@ namespace BrowserStack.App.Common
         {
             return App
                 .Capabilities
-                .GetCapability("os")
+                .GetCapability("platformName")
                 .ToString()
                 .ToLower()
                 .Equals(DeviceType.Android.ToString().ToLower());

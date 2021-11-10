@@ -11,7 +11,7 @@ namespace BrowserStack.WebDriver.Config
 
         public string Key { get; private set; }
 
-        public CommonCapabilities CommonCapabilities { get; private set; }
+        public Capabilities CommonCapabilities { get; private set; }
 
         public LocalTunnelConfig LocalTunnel { get; private set; }
 

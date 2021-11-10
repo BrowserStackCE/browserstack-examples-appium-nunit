@@ -33,6 +33,10 @@ This repository includes a number of **[sample configuration files](/app/webdriv
  2. Allure Command Line Tool 
  3. [BrowserStack AppAutomate Account](https://www.browserstack.com/app-automate). ![BrowserStack](https://img.shields.io/badge/For-BrowserStackAppAutomate-orange)
  4. Upload Your App on BrowserStack <br>Click [here](https://www.browserstack.com/docs/app-automate/api-reference/appium/apps#upload-an-app) for more details on how to upload an app.
+
+ For this example repository, the sample apps are available here:
+ 1. Xamarin: bin/xamarin/SimpleApp_Android.apk, bin/xamarin/SimpleApp_iOS.ipa
+
 </br>
  
   ## Setup with Nunit 
@@ -76,6 +80,10 @@ On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel
   ```sh
   export BROWSERSTACK_USERNAME=<browserstack-username> &&
   export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
+  export CAPABILITIES_FILENAME=<capabilities_file>
+  export BROWSERSTACK_ANDROID_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
+  export BROWSERSTACK_IOS_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
+  
   ```
 
   - For Windows:
@@ -83,14 +91,22 @@ On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel
   ```shell
   set BROWSERSTACK_USERNAME=<browserstack-username>
   set BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
+  set CAPABILITIES_FILENAME=<capabilities_file>
+  set BROWSERSTACK_ANDROID_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
+  set BROWSERSTACK_IOS_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
+  
   ```
 
-  Alternatively, you can also add your username and access_key objects in the cloud driver [configuration files](/app/webdriver/resources/*.yml).
+:page_facing_up: Note: We have configured a list of test capabilities in these [configuration files](/browserstack-examples-appium-nunit/Browserstack/Webdriver/Resources/)
 
-:page_facing_up: Note: We have configured a list of test capabilities in these [configuration files](/app/webdriver/resources/*.yml). You are free update them based on your device test requirements. The exact test capability values can be easily identified using the [Browserstack Capability Generator](https://browserstack.com/app-automate/capabilities)
+ Default Configuration file: 
+ CAPABILITIES_FILENAME = capabilities.yml. 
+ This default capabilities file and other test configuration files reside in the below folder: 
+ `browserstack-examples-appium-nunit/Browserstack/Webdriver/Resources/`
 
- 
- 
+
+Feel free to update the configurations based on your device and test requirements. The exact test capability values can be easily identified using the [Browserstack Capability Generator](https://browserstack.com/app-automate/capabilities)
+  
  
  
 ## Test Execution Profiles
@@ -118,7 +134,7 @@ Following are the preconfigured test execution profiles.
  </tr>
  
   <tr>
-  <td>Parallel Executiion
+  <td>Parallel Execution
    <br>
    <a href="#test-execution-prerequisites--2"><img src="https://img.shields.io/badge/Requires-BrowserStackAppAutomate-orange"/></a>
    </td>
@@ -126,6 +142,18 @@ Following are the preconfigured test execution profiles.
   <td><code>dotnet test</code></td>
   <td><code>dotnet test</code></td>
  </tr>
+
+   <tr>
+  <td>Parallel Execution with additonal flags to specify capabilities file, logger and a dotnet test runsettings file at runntime
+   <br>
+   <a href="#test-execution-prerequisites--2"><img src="https://img.shields.io/badge/Requires-BrowserStackAppAutomate-orange"/></a>
+   </td>
+  <td>Concurrently runs the entire test suite on a multiple Devices on BrowserStack.</td>
+  <td><code>CAPABILITIES_FILENAME=&lt;capability_file_name.yml&gt; dotnet test --logger:"&lt;NUnit_Logger&gt;" -s &lt;runsettings_file_with_additional_flags&gt;</code></td>
+  <td><code>CAPABILITIES_FILENAME=capabilities.yml dotnet test --logger:"nunit;LogFilePath=test-results/results.xml" -s test.runsettings</code></td>
+ </tr>
+
+
  </table>
  
  
