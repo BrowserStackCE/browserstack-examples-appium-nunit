@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using BrowserStack.WebDriver.Config;
 using log4net;
 using OpenQA.Selenium;
