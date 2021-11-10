@@ -126,7 +126,7 @@ namespace BrowserStack.WebDriver.Core
             RemoteDriverConfig remoteDriverConfig = this.MobileDriverConfiguration.CloudDriverConfig;
             Capabilities commonCapabilities = remoteDriverConfig.CommonCapabilities;
             Capabilities sessionCapabilities = platform.SessionCapabilities;
-            AppiumOptions platformOptions = new();
+            AppiumOptions appiumOptions = new();
             Dictionary<string, object> browserstackOptions = new ();
 
             if (commonCapabilities.BStackOptions != null)
@@ -144,31 +144,25 @@ namespace BrowserStack.WebDriver.Core
                 foreach (KeyValuePair<string, object> tuple in commonCapabilities.PlatformOptions)
                 {
 
-                    platformOptions.AddAdditionalCapability(tuple.Key.ToString(), tuple.Value);
+                    appiumOptions.AddAdditionalCapability(tuple.Key.ToString(), tuple.Value);
 
                 }
             }
 
             if (sessionCapabilities.BStackOptions != null)
             {
-                foreach (KeyValuePair<string, object> tuple in platform.SessionCapabilities.BStackOptions)
+                foreach (KeyValuePair<string, object> tuple in sessionCapabilities.BStackOptions)
                 {
-                    platformOptions.AddAdditionalCapability(tuple.Key.ToString(), tuple.Value);
-
-                }
-
-                foreach (KeyValuePair<string, object> tuple in platform.SessionCapabilities.PlatformOptions)
-                {
-                    platformOptions.AddAdditionalCapability(tuple.Key.ToString(), tuple.Value);
+                    browserstackOptions.Add(tuple.Key.ToString(), tuple.Value);
 
                 }
             }
 
             if (sessionCapabilities.PlatformOptions != null)
             {
-                foreach (KeyValuePair<string, object> tuple in platform.SessionCapabilities.PlatformOptions)
+                foreach (KeyValuePair<string, object> tuple in sessionCapabilities.PlatformOptions)
                 {
-                    platformOptions.AddAdditionalCapability(tuple.Key.ToString(), tuple.Value);
+                    appiumOptions.AddAdditionalCapability(tuple.Key.ToString(), tuple.Value);
 
                 }
             }
@@ -193,23 +187,23 @@ namespace BrowserStack.WebDriver.Core
                 browserstackOptions["buildName"] = CreateBuildName(build.ToString());
             }
 
-            platformOptions.AddAdditionalCapability("bstack:options", browserstackOptions);
+            appiumOptions.AddAdditionalCapability("bstack:options", browserstackOptions);
 
-            return platformOptions;
+            return appiumOptions;
         }
 
-        public AppiumDriver<AppiumWebElement> CreateRemoteMobileDriver(AppiumOptions platformOptions)
+        public AppiumDriver<AppiumWebElement> CreateRemoteMobileDriver(AppiumOptions appiumOptions)
         {
             AppiumDriver<AppiumWebElement> driver;
-            object Os = platformOptions.ToCapabilities().GetCapability("platformName");
+            object Os = appiumOptions.ToCapabilities().GetCapability("platformName");
             if (Os is not null && Os.ToString().ToLower().Equals(DeviceType.Android.ToString().ToLower()))
             {
                 if (Environment.GetEnvironmentVariable(BROWSERSTACK_ANDROID_APP_ID) != null)
                 {
-                    platformOptions.AddAdditionalCapability("appium:app", Environment.GetEnvironmentVariable(BROWSERSTACK_ANDROID_APP_ID));
+                    appiumOptions.AddAdditionalCapability("appium:app", Environment.GetEnvironmentVariable(BROWSERSTACK_ANDROID_APP_ID));
                 }
 
-                driver = new AndroidDriver<AppiumWebElement>(new Uri(this.MobileDriverConfiguration.CloudDriverConfig.HubUrl), platformOptions);
+                driver = new AndroidDriver<AppiumWebElement>(new Uri(this.MobileDriverConfiguration.CloudDriverConfig.HubUrl), appiumOptions);
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
                 return driver;
             }
@@ -217,10 +211,10 @@ namespace BrowserStack.WebDriver.Core
             {
                 if (Environment.GetEnvironmentVariable(BROWSERSTACK_IOS_APP_ID) != null)
                 {
-                    platformOptions.AddAdditionalCapability("appium:app", Environment.GetEnvironmentVariable(BROWSERSTACK_IOS_APP_ID));
+                    appiumOptions.AddAdditionalCapability("appium:app", Environment.GetEnvironmentVariable(BROWSERSTACK_IOS_APP_ID));
                 }
 
-                driver = new IOSDriver<AppiumWebElement>(new Uri(this.MobileDriverConfiguration.CloudDriverConfig.HubUrl), platformOptions);
+                driver = new IOSDriver<AppiumWebElement>(new Uri(this.MobileDriverConfiguration.CloudDriverConfig.HubUrl), appiumOptions);
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
                 return driver;
             }
