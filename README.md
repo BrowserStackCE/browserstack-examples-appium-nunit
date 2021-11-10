@@ -144,11 +144,11 @@ Following are the preconfigured test execution profiles.
  </tr>
 
    <tr>
-  <td>Parallel Execution with additonal flags to specify capabilities file, logger and a dotnet test runsettings file at runntime
+  <td>Parallel Execution with additonal flags
    <br>
    <a href="#test-execution-prerequisites--2"><img src="https://img.shields.io/badge/Requires-BrowserStackAppAutomate-orange"/></a>
    </td>
-  <td>Concurrently runs the entire test suite on a multiple Devices on BrowserStack.</td>
+  <td>Concurrently runs the entire test suite on a multiple Devices on BrowserStack based on capabilities file, logger and a dotnet test runsettings specified at runtime</td>
   <td><code>CAPABILITIES_FILENAME=&lt;capability_file_name.yml&gt; dotnet test --logger:"&lt;NUnit_Logger&gt;" -s &lt;runsettings_file_with_additional_flags&gt;</code></td>
   <td><code>CAPABILITIES_FILENAME=capabilities.yml dotnet test --logger:"nunit;LogFilePath=test-results/results.xml" -s test.runsettings</code></td>
  </tr>
