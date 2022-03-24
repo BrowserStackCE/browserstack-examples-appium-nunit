@@ -1,0 +1,28 @@
+﻿DriverType: CloudDriver
+CloudDriverConfig:
+  HubUrl: https://hub-cloud.browserstack.com/wd/hub
+  User: <BROWSERSTACK_USERNAME>
+  Key: <BROWSERSTACK_ACCESS_KEY>
+  LocalTunnel:
+    LocalOptions:
+        binarypath: <optional/on/win/absolute/path/to/BrowserStackLocal>
+        force: true
+    IsEnabled: true
+  CommonCapabilities:
+    BStackOptions:
+      projectName: BrowserStack Examples Appium NUnit
+      buildName: browserstack-examples-appium-nunit
+      debug: true
+      networkLogs: true
+  Platforms:
+    - SessionCapabilities:
+        PlatformOptions:
+          platformName: android
+          "appium:deviceName": Samsung Galaxy S20
+          "appium:app": <BROWSERSTACK_ANDROID_APP_ID>
+          platformVersion: 10.0
+    - SessionCapabilities:
+        PlatformOptions:
+          platformName: ios
+          "appium:deviceName": iPhone 12
+          "appium:app": <BROWSERSTACK_IOS_APP_ID>

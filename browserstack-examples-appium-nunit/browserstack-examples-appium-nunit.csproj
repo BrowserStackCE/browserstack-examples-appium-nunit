@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>browserstack_examples_appium_nunit</RootNamespace>
+    <LangVersion>9.0</LangVersion>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="BrowserStackLocal" Version="2.0.0" />
+    <PackageReference Include="Appium.WebDriver" Version="4.3.1" />
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="log4net" Version="2.0.13" />
+    <PackageReference Include="NunitXml.TestLogger" Version="3.0.117" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Browserstack\Webdriver\Resources\**">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <LinkBase>resources</LinkBase>
+    </Content>
+</ItemGroup>
+</Project>

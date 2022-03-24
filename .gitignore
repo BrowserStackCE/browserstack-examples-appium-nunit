@@ -10,6 +10,9 @@
 *.userosscache
 *.sln.docstates
 
+# Mac
+.DS_Store
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -47,6 +50,7 @@ Generated\ Files/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+test-results
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
