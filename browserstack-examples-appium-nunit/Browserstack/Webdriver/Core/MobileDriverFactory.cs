@@ -21,7 +21,7 @@ namespace BrowserStack.WebDriver.Core
         private readonly string BROWSERSTACK_ACCESS_KEY = "BROWSERSTACK_ACCESS_KEY";
         private readonly string BROWSERSTACK_ANDROID_APP_ID = "BROWSERSTACK_ANDROID_APP_ID";
         private readonly string BROWSERSTACK_IOS_APP_ID = "BROWSERSTACK_IOS_APP_ID";
-        private readonly string BUILD_ID = "BROWSERSTACK_BUILD_NAME";
+        private readonly string BUILD_NAME = "BROWSERSTACK_BUILD_NAME";
         private readonly string DEFAULT_BUILD_NAME = "browserstack-examples-appium_nunit";
         public readonly string CAPABILITIES_DIR = "/Browserstack/Webdriver/Resources/";
 
@@ -184,7 +184,7 @@ namespace BrowserStack.WebDriver.Core
 
             if (build is not null)
             {
-                browserstackOptions["buildName"] = CreateBuildName(build.ToString());
+                browserstackOptions["buildName"] = GetBuildName(build.ToString());
             }
 
             appiumOptions.AddAdditionalCapability("bstack:options", browserstackOptions);
@@ -227,22 +227,16 @@ namespace BrowserStack.WebDriver.Core
             }
         }
 
-        private String CreateBuildName(String buildPrefix)
+        private String GetBuildName(String buildName)
         {
-            if (String.IsNullOrEmpty(buildPrefix))
-            {
-                buildPrefix = DEFAULT_BUILD_NAME;
-            }
-            String buildName = buildPrefix;
+            string envbuildName = Environment.GetEnvironmentVariable(BUILD_NAME);
 
-            String buildSuffix = Environment.GetEnvironmentVariable(BUILD_ID);
-
-            if (string.IsNullOrEmpty(buildSuffix))
+            if (String.IsNullOrEmpty(envbuildName))
             {
-                buildSuffix = this.DefaultBuildSuffix;
+                envbuildName = buildName;
             }
 
-            return String.Format("{0}-{1}", buildName, buildSuffix);
+            return envbuildName;
         }
 
 

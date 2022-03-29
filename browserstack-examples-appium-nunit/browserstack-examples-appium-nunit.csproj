@@ -20,6 +20,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="log4net" Version="2.0.13" />
     <PackageReference Include="NunitXml.TestLogger" Version="3.0.117" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="107.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,4 +30,8 @@
         <LinkBase>resources</LinkBase>
     </Content>
 </ItemGroup>
+  <ItemGroup>
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="RestSharp" />
+  </ItemGroup>
 </Project>
