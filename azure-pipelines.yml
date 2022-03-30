@@ -46,7 +46,10 @@ steps:
   continueOnError: true
   env:
     BROWSERSTACK_BUILD_NAME: browserstack-examples-appium-nunit-$(Build.BuildId)
-    
+
+- task: BrowserStackResults@1
+  inputs:
+    browserstackProduct: 'app-automate'
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Pipeline Artifact'
   inputs:
