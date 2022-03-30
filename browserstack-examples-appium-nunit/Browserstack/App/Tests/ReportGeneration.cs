@@ -21,7 +21,7 @@ namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
             var userName = Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME") ?? "";
             var accessKey = Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY") ?? "";
             var buildName = Environment.GetEnvironmentVariable("BROWSERSTACK_BUILD_NAME") ?? "";
-            //var buildName = "Sales Demo";
+            var routeAPI = "https://api.browserstack.com";
 
 
             var fileLocation = "../../../../Reports/output.html";
@@ -36,10 +36,10 @@ namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
 
             await System.IO.File.WriteAllLinesAsync(fileLocation, htmlStart);
 
-            var client = new RestClient("https://api.browserstack.com");
+            var client = new RestClient(routeAPI);
             client.Authenticator = new HttpBasicAuthenticator(userName, accessKey);
 
-            var buildApiRequest = new RestRequest("https://api.browserstack.com/app-automate/builds.json?limit=40");
+            var buildApiRequest = new RestRequest(routeAPI+"/app-automate/builds.json?limit=40");
             var buildQueryResult = await client.ExecuteAsync(buildApiRequest);
             var buildJsonStr = buildQueryResult.Content ?? "";
 
