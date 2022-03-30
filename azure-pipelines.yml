@@ -23,12 +23,15 @@ steps:
   displayName: 'Build Project'
   inputs:
     command: 'build'
+
+
 - task: DotNetCoreCLI@2
   name: 'TestProjectBuild'
   displayName: 'Run Tests'
   inputs:
     command: 'test'
     arguments: '--filter FullyQualifiedName\!~ReportGeneration'
+  continueOnError: true
   env:
     CAPABILITIES_FILENAME: capabilities.yml
     BROWSERSTACK_ANDROID_APP_ID: SimpleApp_Android
@@ -40,6 +43,7 @@ steps:
   inputs:
     command: 'test'
     arguments: '--filter ReportGeneration'
+  continueOnError: true
   env:
     BROWSERSTACK_BUILD_NAME: browserstack-examples-appium-nunit-$(Build.BuildId)
     
