@@ -28,7 +28,23 @@ steps:
   displayName: 'Test Project'
   inputs:
     command: 'test'
+    arguments: '--filter FullyQualifiedName\!~ReportGeneration'
   env:
     CAPABILITIES_FILENAME: capabilities.yml
     BROWSERSTACK_ANDROID_APP_ID: SimpleApp_Android
     BROWSERSTACK_IOS_APP_ID: SimpleApp_iOS
+    BROWSERSTACK_BUILD_NAME: browserstack-examples-appium-nunit-$(Build.BuildId)
+- task: DotNetCoreCLI@2
+  name: 'TestProject'
+  displayName: 'Test Project'
+  inputs:
+    command: 'test'
+    arguments: '--filter ReportGeneration'
+  env:
+    BROWSERSTACK_BUILD_NAME: browserstack-examples-appium-nunit-$(Build.BuildId)
+    
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Pipeline Artifact'
+  inputs:
+    targetPath: ./Reports/output.html
+    artifact: 'Build Report'
