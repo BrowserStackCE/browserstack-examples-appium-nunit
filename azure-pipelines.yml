@@ -24,8 +24,8 @@ steps:
   inputs:
     command: 'build'
 - task: DotNetCoreCLI@2
-  name: 'TestProject'
-  displayName: 'Test Project'
+  name: 'TestProjectBuild'
+  displayName: 'Run Tests'
   inputs:
     command: 'test'
     arguments: '--filter FullyQualifiedName\!~ReportGeneration'
@@ -35,8 +35,8 @@ steps:
     BROWSERSTACK_IOS_APP_ID: SimpleApp_iOS
     BROWSERSTACK_BUILD_NAME: browserstack-examples-appium-nunit-$(Build.BuildId)
 - task: DotNetCoreCLI@2
-  name: 'TestProject'
-  displayName: 'Test Project'
+  name: 'TestProjectReport'
+  displayName: 'Run Report'
   inputs:
     command: 'test'
     arguments: '--filter ReportGeneration'
