@@ -5,26 +5,14 @@ using OpenQA.Selenium.Appium;
 
 namespace BrowserStack.App.Tests
 {
-    [TestFixtureSource(typeof(MobileDriverTestRunner))]
     public class AboutTest : MobileDriverTestRunner
     {
 
-        public AboutTest(AppiumOptions appiumOptions)
-        {
-           App = GetDriver(appiumOptions);
-        }
-
-
-        [OneTimeSetUp]
-        public void Init()
-        {
-            SetTestName(this.GetType().Name);
-        }
-
         [Test]
-        public void GoToAboutTab()
+        [TestCaseSource(typeof(MobileDriverTestRunner))]
+        public void GoToAboutTab(AppiumOptions appiumOptions)
         {
-            AboutPage aboutPage = new(App);
+            AboutPage aboutPage = new(GetDriver(appiumOptions));
             aboutPage.GoToAboutTab();
         }
 
@@ -36,13 +24,7 @@ namespace BrowserStack.App.Tests
             {
                 Console.WriteLine(App.PageSource);
             }
-
-            App.ResetApp();
-        }
-
-        [OneTimeTearDown]
-        public void CleanUp()
-        {
+            SetTestName(SessionName);
             MarkTestStatus();
             Shutdown();
         }

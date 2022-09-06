@@ -5,34 +5,24 @@ using OpenQA.Selenium.Appium;
 
 namespace BrowserStack.App.Tests
 {
-    [TestFixtureSource(typeof(MobileDriverTestRunner))]
     public class BrowseTest: MobileDriverTestRunner
-    {
-
-        public BrowseTest(AppiumOptions appiumOptions)
-        {
-            App = GetDriver(appiumOptions);
-        }
-
-        [OneTimeSetUp]
-        public void Init()
-        {
-            SetTestName(this.GetType().Name);
-        }    
+    {   
 
         [Test]
-        public void CheckItemCount()
+        [TestCaseSource(typeof(MobileDriverTestRunner))]
+        public void CheckItemCount(AppiumOptions appiumOptions)
         {
 
-            BrowsePage browsePage = new(App);
+            BrowsePage browsePage = new(GetDriver(appiumOptions));
             browsePage.ValidateBrowseItem("Sixth item");
 
         }
 
         [Test]
-        public void AddNewItem()
+        [TestCaseSource(typeof(MobileDriverTestRunner))]
+        public void AddNewItem(AppiumOptions appiumOptions)
         {
-            BrowsePage browsePage = new(App);
+            BrowsePage browsePage = new(GetDriver(appiumOptions));
             browsePage.AddNewItem("Seventh item", "This is an item description");
         }
 
@@ -43,13 +33,7 @@ namespace BrowserStack.App.Tests
             {
                 Console.WriteLine(App.PageSource);
             }
-
-            App.ResetApp();
-        }
-
-        [OneTimeTearDown]
-        public void CleanUp()
-        {
+            SetTestName(SessionName);
             MarkTestStatus();
             Shutdown();
         }

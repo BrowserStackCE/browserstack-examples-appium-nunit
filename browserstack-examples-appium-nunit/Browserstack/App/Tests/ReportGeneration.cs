@@ -53,7 +53,7 @@ namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
                     foreach (JObject buildObj in buildList)
                     {
                         var build = buildObj["automation_build"];
-                        var bName = (string?)build["name"];
+                        var bName = (string)build["name"];
                         if (buildName.Equals(bName))
                         {
                             BuildId = build["hashed_id"].ToString();
