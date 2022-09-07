@@ -11,6 +11,7 @@ namespace BrowserStack.App
 {
     public class MobileDriverTestRunner: IEnumerable 
     {
+        protected AppiumOptions appiumOptions;
         protected Dictionary<string,AppiumDriver<AppiumWebElement>> drivers = new Dictionary<string, AppiumDriver<AppiumWebElement>>();
 
         protected string TestID{

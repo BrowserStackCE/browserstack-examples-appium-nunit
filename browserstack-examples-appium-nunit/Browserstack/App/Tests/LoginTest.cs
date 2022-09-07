@@ -5,24 +5,32 @@ using OpenQA.Selenium.Appium;
 
 namespace BrowserStack.App.Tests
 {
+    [TestFixtureSource(typeof(MobileDriverTestRunner))]
     public class LoginTest : MobileDriverTestRunner
     {
+        public LoginTest(AppiumOptions appiumOptions){
+            this.appiumOptions = appiumOptions;
+        }
+        [SetUp]
+        public void init(){
+            GetDriver(appiumOptions);
+            SetTestName(SessionName);
+        }
 
-        [Test]
-        [TestCaseSource(typeof(MobileDriverTestRunner))]
-        public void PerformLoginValidCreds(AppiumOptions appiumOptions)
+        [TestCase("hellouser","hellopassword")]
+        [TestCase("hellouser2","hellopassword")]
+        [TestCase("hellouser3","hellopassword")]
+        public void PerformLoginValidCreds(string user,string password)
         {
-            LoginPage loginPage = new(GetDriver(appiumOptions));
-            loginPage.PerformLogin("hellouser", "hellopassword");
+            LoginPage loginPage = new(App);
+            loginPage.PerformLogin(user, password);
             loginPage.ValidateLogin();
         }
 
-
         [Test]
-        [TestCaseSource(typeof(MobileDriverTestRunner))]
-        public void PerformLoginNoCreds(AppiumOptions appiumOptions)
+        public void PerformLoginNoCreds()
         {
-            LoginPage loginPage = new(GetDriver(appiumOptions));
+            LoginPage loginPage = new(App);
             loginPage.PerformLogin();
             loginPage.ValidateLogin();
         }
@@ -34,7 +42,6 @@ namespace BrowserStack.App.Tests
             {
                 Console.WriteLine(App.PageSource);
             }
-            SetTestName(SessionName);
             MarkTestStatus();
             Shutdown();
         }
