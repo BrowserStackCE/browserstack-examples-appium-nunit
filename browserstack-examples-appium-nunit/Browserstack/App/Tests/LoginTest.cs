@@ -11,6 +11,7 @@ namespace BrowserStack.App.Tests
         public LoginTest(AppiumOptions appiumOptions){
             this.appiumOptions = appiumOptions;
         }
+        
         [SetUp]
         public void init(){
             GetDriver(appiumOptions);
