@@ -12,21 +12,25 @@ namespace BrowserStack.App
     public class MobileDriverTestRunner: IEnumerable 
     {
         protected Dictionary<string,AppiumDriver<AppiumWebElement>> drivers = new Dictionary<string, AppiumDriver<AppiumWebElement>>();
+
         protected string TestID{
             get{
                 return TestContext.CurrentContext.Test.ID;
             }
         }
+
         protected string SessionName{
             get{
                 return TestContext.CurrentContext.Test.ClassName + '.' + TestContext.CurrentContext.Test.MethodName;
             }
         }
+
         protected AppiumDriver<AppiumWebElement> App{
             get{
                 return drivers[TestID];
             }
         }
+
         private static readonly ILog log = LogManager.GetLogger(typeof(MobileDriverTestRunner));
         public IEnumerator GetEnumerator()
         {
