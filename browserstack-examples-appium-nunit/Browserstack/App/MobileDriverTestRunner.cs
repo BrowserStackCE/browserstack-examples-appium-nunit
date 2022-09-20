@@ -22,7 +22,7 @@ namespace BrowserStack.App
 
         protected string SessionName{
             get{
-                return TestContext.CurrentContext.Test.ClassName + '.' + TestContext.CurrentContext.Test.MethodName;
+                return TestContext.CurrentContext.Test.Name;
             }
         }
 
@@ -49,6 +49,7 @@ namespace BrowserStack.App
 
         protected void SetTestName(String name)
         {
+            name = name.Replace("\""," ");
             ((IJavaScriptExecutor)App).ExecuteScript("browserstack_executor: {\"action\": \"setSessionName\", \"arguments\": {\"name\":\"" + name + "\" }}");
         }
 
