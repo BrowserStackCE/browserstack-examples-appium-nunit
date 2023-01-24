@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using BrowserStack.WebDriver.Config;
 using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Support.UI;
 
-namespace BrowserStack.App.Common
+namespace browserstack_examples_appium_nunit.Common
 {
     public class TechnicalActions
     {
@@ -32,7 +31,7 @@ namespace BrowserStack.App.Common
             appiumWebElement.Click();
         }
 
-        internal void SetText(Dictionary<DeviceType, PageObject> element, String text)
+        internal void SetText(Dictionary<DeviceType, PageObject> element, string text)
         {
             AppiumWebElement appiumWebElement = FindElementByPlatform(element);
             appiumWebElement.SendKeys(text);
@@ -69,12 +68,12 @@ namespace BrowserStack.App.Common
             {
                 Log.Debug(e.Message);
                 Log.Debug(App.PageSource);
-                if(forceFail)
+                if (forceFail)
                 {
                     throw new Exception("EXCEPTION: Could not find Web element - " +
                     e.Message);
                 }
-                
+
             }
 
             return webElement;
@@ -103,18 +102,18 @@ namespace BrowserStack.App.Common
 
         private AppiumWebElement FindElement(LocatorType locatorType, string locatorValue)
         {
-            switch(locatorType)
+            switch (locatorType)
             {
                 case LocatorType.AccessibilityId:
                     return WaitForElement(MobileBy.AccessibilityId(locatorValue));
                 case LocatorType.ClassName:
-                    return WaitForElement(MobileBy.ClassName(locatorValue));
+                    return WaitForElement(By.ClassName(locatorValue));
                 case LocatorType.XPath:
-                    return WaitForElement(MobileBy.XPath(locatorValue));
+                    return WaitForElement(By.XPath(locatorValue));
                 case LocatorType.Name:
-                    return WaitForElement(MobileBy.Name(locatorValue));
+                    return WaitForElement(By.Name(locatorValue));
                 case LocatorType.Id:
-                    return WaitForElement(MobileBy.Id(locatorValue));
+                    return WaitForElement(By.Id(locatorValue));
                 case LocatorType.AndroidUIAutomator2:
                     return WaitForElement(MobileBy.AndroidUIAutomator(locatorValue));
                 case LocatorType.IOSPredicateString:

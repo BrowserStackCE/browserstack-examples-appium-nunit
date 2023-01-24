@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using BrowserStack.App.Common;
-using BrowserStack.WebDriver.Config;
+using browserstack_examples_appium_nunit.Common;
 using NUnit.Framework;
 using OpenQA.Selenium.Appium;
 
 
-namespace BrowserStack.App.Pages
+namespace browserstack_examples_appium_nunit.Pages
 {
     public class AboutPage
     {
@@ -21,7 +20,7 @@ namespace BrowserStack.App.Pages
             { DeviceType.Android, new(LocatorType.AccessibilityId, "LearnMore") },
             { DeviceType.Ios, new(LocatorType.AccessibilityId, "LearnMore") },
         };
-        
+
 
         readonly TechnicalActions Actions;
 

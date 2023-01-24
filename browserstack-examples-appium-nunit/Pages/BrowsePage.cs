@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using BrowserStack.App.Common;
-using BrowserStack.WebDriver.Config;
+using browserstack_examples_appium_nunit.Common;
 using NUnit.Framework;
 using OpenQA.Selenium.Appium;
 
 
-namespace BrowserStack.App.Pages
+namespace browserstack_examples_appium_nunit.Pages
 {
     public class BrowsePage
     {
         readonly Dictionary<DeviceType, PageObject> ButtonBrowse = new()
-        { 
+        {
             { DeviceType.Android, new(LocatorType.AccessibilityId, "Browse") },
             { DeviceType.Ios, new(LocatorType.AccessibilityId, "Browse") },
         };
@@ -62,7 +61,7 @@ namespace BrowserStack.App.Pages
 
         }
 
-        public void AddNewItem(String itemName, string itemDescription)
+        public void AddNewItem(string itemName, string itemDescription)
         {
             Actions.PerformClick(ButtonBrowse);
             Actions.PerformClick(ButtonAddItem);

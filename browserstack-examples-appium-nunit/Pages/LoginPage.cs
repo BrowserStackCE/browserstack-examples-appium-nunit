@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using BrowserStack.App.Common;
-using BrowserStack.WebDriver.Config;
+using browserstack_examples_appium_nunit.Common;
 using NUnit.Framework;
 using OpenQA.Selenium.Appium;
 
-namespace BrowserStack.App.Pages
+namespace browserstack_examples_appium_nunit.Pages
 {
     public class LoginPage
     {
@@ -41,7 +40,7 @@ namespace BrowserStack.App.Pages
             Actions = new(app);
         }
 
-        public void PerformLogin(String username, String password)
+        public void PerformLogin(string username, string password)
         {
             Actions.SetText(EditUserName, username);
             Actions.SetText(EditPassword, password);

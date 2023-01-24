@@ -1,5 +1,5 @@
 using System;
-namespace BrowserStack.App.Common
+namespace browserstack_examples_appium_nunit.Common
 {
     public enum LocatorType
     {

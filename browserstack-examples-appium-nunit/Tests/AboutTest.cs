@@ -1,25 +1,14 @@
 ﻿using System;
-using BrowserStack.App.Pages;
+using browserstack_examples_appium_nunit.Pages;
 using NUnit.Framework;
-using OpenQA.Selenium.Appium;
 
-namespace BrowserStack.App.Tests
+namespace browserstack_examples_appium_nunit.Tests
 {
-    [TestFixtureSource(typeof(MobileDriverTestRunner))]
+    [TestFixture]
     public class AboutTest : MobileDriverTestRunner
     {
 
-        public AboutTest(AppiumOptions appiumOptions)
-        {
-           App = GetDriver(appiumOptions);
-        }
-
-
-        [OneTimeSetUp]
-        public void Init()
-        {
-            SetTestName(this.GetType().Name);
-        }
+        public AboutTest() : base() { }
 
         [Test]
         public void GoToAboutTab()
@@ -40,11 +29,5 @@ namespace BrowserStack.App.Tests
             App.ResetApp();
         }
 
-        [OneTimeTearDown]
-        public void CleanUp()
-        {
-            MarkTestStatus();
-            Shutdown();
-        }
     }
 }
