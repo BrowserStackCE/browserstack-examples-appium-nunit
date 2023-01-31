@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# BrowserStack SDK
+browserstack-examples-appium-nunit/browserstack.yml
+
 # User-specific files
 *.rsuser
 *.suo

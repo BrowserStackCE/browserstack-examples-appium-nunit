@@ -33,6 +33,12 @@
 </ItemGroup>
   <ItemGroup>
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Resources\ios_browserstack.yml" />
     <None Remove="RestSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Resources\ios_browserstack.yml">
+      <LinkBase>$([MSBuild]::EnsureTrailingSlash(%(LinkBase)))</LinkBase>
+    </Content>
   </ItemGroup>
 </Project>
