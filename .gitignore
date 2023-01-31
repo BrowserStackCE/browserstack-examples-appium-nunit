@@ -5,6 +5,7 @@
 
 # BrowserStack SDK
 browserstack-examples-appium-nunit/browserstack.yml
+Reports
 
 # User-specific files
 *.rsuser
