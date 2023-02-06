@@ -5,10 +5,9 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
-using BrowserStack.App.Pages;
 using System.IO;
 
-namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
+namespace browserstack_examples_appium_nunit.Tests
 {
     public class ReportGeneration
     {
@@ -34,12 +33,12 @@ namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
 
             string[] htmlEnd = { "</table></body></html>" };
 
-            await System.IO.File.WriteAllLinesAsync(fileLocation, htmlStart);
+            await File.WriteAllLinesAsync(fileLocation, htmlStart);
 
             var client = new RestClient(routeAPI);
             client.Authenticator = new HttpBasicAuthenticator(userName, accessKey);
 
-            var buildApiRequest = new RestRequest(routeAPI+"/app-automate/builds.json?limit=40");
+            var buildApiRequest = new RestRequest(routeAPI + "/app-automate/builds.json?limit=40");
             var buildQueryResult = await client.ExecuteAsync(buildApiRequest);
             var buildJsonStr = buildQueryResult.Content ?? "";
 
@@ -53,7 +52,7 @@ namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
                     foreach (JObject buildObj in buildList)
                     {
                         var build = buildObj["automation_build"];
-                        var bName = (string?)build["name"];
+                        var bName = (string)build["name"];
                         if (buildName.Equals(bName))
                         {
                             BuildId = build["hashed_id"].ToString();
@@ -102,7 +101,7 @@ namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
                         "</td><td>" + session["device"] +
                     "</td><td>" + session["status"] + "</tr>" };
 
-                                    await System.IO.File.AppendAllLinesAsync(fileLocation, textContextToAdd);
+                                    await File.AppendAllLinesAsync(fileLocation, textContextToAdd);
                                 }
                             }
                         }
@@ -116,10 +115,10 @@ namespace browserstack_examples_appium_nunit.Browserstack.App.Tests
                 } while (true);
 
 
-                await System.IO.File.AppendAllLinesAsync(fileLocation, htmlEnd);
+                await File.AppendAllLinesAsync(fileLocation, htmlEnd);
 
             }
         }
-    
+
     }
 }

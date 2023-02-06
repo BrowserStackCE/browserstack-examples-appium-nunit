@@ -1,4 +1,4 @@
-namespace BrowserStack.App.Common
+namespace browserstack_examples_appium_nunit.Common
 {
     public class PageObject
     {

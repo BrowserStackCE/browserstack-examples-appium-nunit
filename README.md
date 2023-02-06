@@ -4,7 +4,7 @@
 
 Welcome to BrowserStack NUnit Examples, a sample UI testing framework empowered with **[Appium](https://appium.io/)** and **[NUnit](https://nunit.org/)**. Along with the framework the repository also contains a collection of sample test scripts written for **BrowserStack Demo Application**.
 
-This repository includes a number of **[sample configuration files](/app/webdriver/resources/*.yml)** to run these on tests on BrowserStack platforms including **browsers running on a remote selenium grid such as **[BrowserStack AppAutomate](https://www.browserstack.com/app-automate)** 
+This repository includes a number of **[sample configuration files](/browserstack-examples-appium-nunit/Resources/*.yml)** to run these on tests on BrowserStack platforms including **browsers running on a remote selenium grid such as **[BrowserStack AppAutomate](https://www.browserstack.com/app-automate)** 
 
 <h1></h1>
 
@@ -14,11 +14,11 @@ This repository includes a number of **[sample configuration files](/app/webdriv
 
 | Module   | Test Case                          | Description |
   | ---   | ---                                   | --- |
-| [Login](/browserstack-examples-appium-nunit/browserstack/app/tests/LoginTest.cs) |   PerformLoginValidCreds  | Test case Perform Login with valid credentials |
-| [Login](/browserstack-examples-appium-nunit/browserstack/app/tests/LoginTest.cs) |   PerformLoginNoCreds  | Test case Perform Login with Blank credentials |
-| [Browse](/browserstack-examples-appium-nunit/browserstack/app/tests/BrowseTest.cs) |   CheckItemCount  | Test case validates Item counts on initial state of App |
-| [Browse](/browserstack-examples-appium-nunit/browserstack/app/tests/BrowseTest.cs) |   AddNewItem  | Test case adds new item validates newly added item |
-| [About](/browserstack-examples-appium-nunit/browserstack/app/tests/AboutTest.cs) |   GoToAboutTab  | Test case navigates to About tab |
+| [Login](/browserstack-examples-appium-nunit/Tests/LoginTest.cs) |   PerformLoginValidCreds  | Test case Perform Login with valid credentials |
+| [Login](/browserstack-examples-appium-nunit/Tests/LoginTest.cs) |   PerformLoginNoCreds  | Test case Perform Login with Blank credentials |
+| [Browse](/browserstack-examples-appium-nunit/Tests/BrowseTest.cs) |   CheckItemCount  | Test case validates Item counts on initial state of App |
+| [Browse](/browserstack-examples-appium-nunit/Tests/BrowseTest.cs) |   AddNewItem  | Test case adds new item validates newly added item |
+| [About](/browserstack-examples-appium-nunit/Tests/AboutTest.cs) |   GoToAboutTab  | Test case navigates to About tab |
 
 
   
@@ -58,15 +58,15 @@ This repository includes a number of **[sample configuration files](/app/webdriv
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  <code>dotnet build</code>
  
- # :wrench:  [Repository Configuration](https://github.com/samirans89/browserstack-examples-appium-nunit#repositoryconfiguration)
+ # :wrench:  Repository Configuration
  
 The repository is designed to execute test on list of Device's hosted on BrowserStack 
 <br>
 List of devices could be found [here](https://www.browserstack.com/list-of-browsers-and-platforms/app_automate)
 
-On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel to reduce your over all build time. With NUnit you configure the number concurrent test executions to an optimal count by configuring through [AssemblyInfo.cs](https://github.com/samirans89/browserstack-examples-appium-nunit/blob/develop/browserstack-examples-appium-nunit/Properties/AssemblyInfo.cs)
+On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel to reduce your over all build time. With NUnit you configure the number concurrent test executions to an optimal count by configuring through [browserstack.yml](/browserstack-examples-appium-nunit/Resources/android_browserstack.yml)
 
- # :rocket:  [Test Execution](https://github.com/samirans89/browserstack-examples-appium-nunit#testexecution)
+ # :rocket:  Test Execution
 
  ## Test Execution Prerequisites [![BrowserStack](https://img.shields.io/badge/For-BrowserStackAppAutomate-orange)]()
  
@@ -80,9 +80,6 @@ On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel
   ```sh
   export BROWSERSTACK_USERNAME=<browserstack-username> &&
   export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
-  export CAPABILITIES_FILENAME=<capabilities_file>
-  export BROWSERSTACK_ANDROID_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
-  export BROWSERSTACK_IOS_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
   
   ```
 
@@ -91,19 +88,25 @@ On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel
   ```shell
   set BROWSERSTACK_USERNAME=<browserstack-username>
   set BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
-  set CAPABILITIES_FILENAME=<capabilities_file>
-  set BROWSERSTACK_ANDROID_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
-  set BROWSERSTACK_IOS_APP_ID=<APP_BSTACK_URL__OR__CUSTOM_ID>
   
   ```
 
-:page_facing_up: Note: We have configured a list of test capabilities in these [configuration files](/browserstack-examples-appium-nunit/Browserstack/Webdriver/Resources/)
+:page_facing_up: Note: We have configured a list of test capabilities in these [configuration files](/browserstack-examples-appium-nunit/Resources/)
 
- Default Configuration file: 
- CAPABILITIES_FILENAME = capabilities.yml. 
- This default capabilities file and other test configuration files reside in the below folder: 
- `browserstack-examples-appium-nunit/Browserstack/Webdriver/Resources/`
+- Copy the capabilities to the root of the project:
 
+  - For \*nix based and Mac machines:
+
+  ```sh
+  rm -f -- browserstack.yml
+  ln Resources/*.yml browserstack.yml
+  ```
+
+  - For Windows:
+
+  ```sh
+  del /f "browserstack.yml" && copy /y .\Resources\*.yml browserstack.yml
+  ```
 
 Feel free to update the configurations based on your device and test requirements. The exact test capability values can be easily identified using the [Browserstack Capability Generator](https://browserstack.com/app-automate/capabilities)
   
@@ -129,8 +132,8 @@ Following are the preconfigured test execution profiles.
    <a href="#test-execution-prerequisites--2"><img src="https://img.shields.io/badge/Requires-BrowserStackAppAutomate-orange"/></a>
   </td>
   <td>Runs a single test on a two devices Android & iOS parallely on BrowserStack.</td>
-  <td><code>dotnet test --filter "Method Name"</code></td>
-  <td><code>dotnet test --filter "CheckItemCount"</code></td>
+  <td><code>dotnet browserstack-sdk --filter "Method Name"</code></td>
+  <td><code>dotnet browserstack-sdk --filter "CheckItemCount"</code></td>
  </tr>
  
   <tr>
@@ -139,8 +142,8 @@ Following are the preconfigured test execution profiles.
    <a href="#test-execution-prerequisites--2"><img src="https://img.shields.io/badge/Requires-BrowserStackAppAutomate-orange"/></a>
    </td>
   <td>Concurrently runs the entire test suite on a multiple Devices on BrowserStack.</td>
-  <td><code>dotnet test</code></td>
-  <td><code>dotnet test</code></td>
+  <td><code>dotnet browserstack-sdk</code></td>
+  <td><code>dotnet browserstack-sdk</code></td>
  </tr>
 
    <tr>
@@ -148,9 +151,9 @@ Following are the preconfigured test execution profiles.
    <br>
    <a href="#test-execution-prerequisites--2"><img src="https://img.shields.io/badge/Requires-BrowserStackAppAutomate-orange"/></a>
    </td>
-  <td>Concurrently runs the entire test suite on a multiple Devices on BrowserStack based on capabilities file, logger and a dotnet test runsettings specified at runtime</td>
-  <td><code>CAPABILITIES_FILENAME=&lt;capability_file_name.yml&gt; dotnet test --logger:"&lt;NUnit_Logger&gt;" -s &lt;runsettings_file_with_additional_flags&gt;</code></td>
-  <td><code>CAPABILITIES_FILENAME=capabilities.yml dotnet test --logger:"nunit;LogFilePath=test-results/results.xml" -s test.runsettings</code></td>
+  <td>Concurrently runs the entire test suite on a multiple Devices on BrowserStack and logger</td>
+  <td><code>dotnet browserstack-sdk --logger:"&lt;NUnit_Logger&gt;"</code></td>
+  <td><code>dotnet browserstack-sdk --logger:"nunit;LogFilePath=test-results/results.xml"</code></td>
  </tr>
 
 

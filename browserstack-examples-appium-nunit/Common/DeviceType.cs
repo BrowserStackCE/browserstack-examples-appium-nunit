@@ -1,4 +1,4 @@
-namespace BrowserStack.WebDriver.Config
+namespace browserstack_examples_appium_nunit.Common
 {
     public enum DeviceType
     {

@@ -1,24 +1,15 @@
 ﻿using System;
-using BrowserStack.App.Pages;
+using browserstack_examples_appium_nunit.Pages;
 using NUnit.Framework;
-using OpenQA.Selenium.Appium;
 
-namespace BrowserStack.App.Tests
+namespace browserstack_examples_appium_nunit.Tests
 {
-    [TestFixtureSource(typeof(MobileDriverTestRunner))]
-    public class BrowseTest: MobileDriverTestRunner
+    [TestFixture]
+    public class BrowseTest : MobileDriverTestRunner
     {
 
-        public BrowseTest(AppiumOptions appiumOptions)
-        {
-            App = GetDriver(appiumOptions);
-        }
+        public BrowseTest() : base() { }
 
-        [OneTimeSetUp]
-        public void Init()
-        {
-            SetTestName(this.GetType().Name);
-        }    
 
         [Test]
         public void CheckItemCount()
@@ -47,11 +38,5 @@ namespace BrowserStack.App.Tests
             App.ResetApp();
         }
 
-        [OneTimeTearDown]
-        public void CleanUp()
-        {
-            MarkTestStatus();
-            Shutdown();
-        }
     }
 }

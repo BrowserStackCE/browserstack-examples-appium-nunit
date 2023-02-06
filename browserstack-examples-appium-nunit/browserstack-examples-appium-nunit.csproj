@@ -1,13 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>browserstack_examples_appium_nunit</RootNamespace>
     <LangVersion>9.0</LangVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BrowserStack.TestAdapter" Version="0.0.1" />
     <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
@@ -20,18 +21,24 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="log4net" Version="2.0.13" />
     <PackageReference Include="NunitXml.TestLogger" Version="3.0.117" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="RestSharp" Version="107.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Browserstack\Webdriver\Resources\**">
+    <Content Include="Resources\**">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         <LinkBase>resources</LinkBase>
     </Content>
 </ItemGroup>
   <ItemGroup>
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Resources\ios_browserstack.yml" />
     <None Remove="RestSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Resources\ios_browserstack.yml">
+      <LinkBase>$([MSBuild]::EnsureTrailingSlash(%(LinkBase)))</LinkBase>
+    </Content>
   </ItemGroup>
 </Project>
