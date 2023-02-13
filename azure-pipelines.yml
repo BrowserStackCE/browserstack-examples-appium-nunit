@@ -33,10 +33,6 @@ steps:
     arguments: '--filter FullyQualifiedName\!~ReportGeneration'
   continueOnError: true
   env:
-    CAPABILITIES_FILENAME: capabilities.yml
-    BROWSERSTACK_ANDROID_APP_ID: SimpleApp_Android
-    BROWSERSTACK_IOS_APP_ID: SimpleApp_iOS
-    BROWSERSTACK_APP_ID: <Test_App>
     BROWSERSTACK_BUILD_NAME: browserstack-examples-appium-nunit-$(Build.BuildId)
 - task: DotNetCoreCLI@2
   name: 'TestProjectReport'
