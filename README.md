@@ -96,16 +96,24 @@ On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel
 - Copy the capabilities to the root of the project:
 
   - For \*nix based and Mac machines:
-
+  For Android:
   ```sh
-  rm -f -- browserstack.yml
-  ln Resources/*.yml browserstack.yml
+  export BROWSERSTACK_CONFIG_FILE="Resources/android_browserstack.yml"
+  ```
+   For iOS:
+  ```sh
+  export BROWSERSTACK_CONFIG_FILE="Resources/ios_browserstack.yml"
   ```
 
   - For Windows:
 
+  For Android:
   ```sh
-  del /f "browserstack.yml" && copy /y .\Resources\*.yml browserstack.yml
+  set BROWSERSTACK_CONFIG_FILE="Resources/android_browserstack.yml"
+  ```
+   For iOS:
+  ```sh
+  set BROWSERSTACK_CONFIG_FILE="Resources/ios_browserstack.yml"
   ```
 
 Feel free to update the configurations based on your device and test requirements. The exact test capability values can be easily identified using the [Browserstack Capability Generator](https://browserstack.com/app-automate/capabilities)
