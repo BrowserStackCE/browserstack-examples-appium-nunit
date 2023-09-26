@@ -96,6 +96,7 @@ On BrowserStack AppAutomate, you can spin multiple Devices instances in parallel
 - Copy the capabilities to the root of the project:
 
   - For \*nix based and Mac machines:
+  
   For Android:
   ```sh
   export BROWSERSTACK_CONFIG_FILE="Resources/android_browserstack.yml"
