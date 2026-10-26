@@ -1,4 +1,4 @@
-<h1 align="center">   :zap: <img src="https://avatars.githubusercontent.com/u/1119453?s=200&v=4" width="60" height="60" > <a href="https://github.com/samirans89/browserstack-examples-appium-nunit">BrowserStack Examples Appium NUnit</a>  <img src="https://nunit.org/img/nunit.svg" width="60" height="60" >
+<h1 align="center">   :zap: <img src="https://www.browserstack.com/images/static/header-logo.jpg" height="40" > <a href="https://github.com/samirans89/browserstack-examples-appium-nunit">BrowserStack Examples Appium NUnit</a>  <img src="https://nunit.org/img/nunit.svg" width="60" height="60" >
  :zap:</h1>
 
 
